@@ -2,17 +2,19 @@ import React from "react";
 
 
 const SearchPage = (props) => {
+    console.log("Results: ", props.searchResults);
 
 
-
-
-
-
-
-
+  
     
     return ( <div>
-        <h2> Search Page </h2>
+             {props.searchResults.map((el)=>{
+                return(<div>
+                    <li>{el.title}</li>
+                    <ul>{el.image}</ul>
+                    <hr></hr>
+                </div>)
+             })} 
     </div> );
 }
  

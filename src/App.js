@@ -21,7 +21,7 @@ function App() {
     try {
       let response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${userInput}&apiKey=a30a8055bce74d128fd0d69da6ff918a`)
       console.log(response.data)
-      setSearchReults(response.data); 
+      setSearchReults(response.data.results); 
     } catch (error) {
       console.log(error.response.data)
     }
@@ -31,9 +31,9 @@ function App() {
   return (
     <div >
       <NavBar />
-     <h3> Hello World!</h3>
+     <h3> Welcome, Search for a Recipe:</h3>
      <SearchBar searchRecipeProps={runSearch} />
-     <SearchPage />
+     <SearchPage searchResults={searchResults} />
      <Footer />
     </div>
   );
