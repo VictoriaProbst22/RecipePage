@@ -2,9 +2,11 @@ import React, { useState } from "react";
 
 const SearchBar = (props) => {
     
-
+    //set search term in state
     const [sTerm, setSTerm] = useState('')
 
+
+    //prevent default page refresh
     function handleSubmit(event){
         event.preventDefault();
 
@@ -17,6 +19,9 @@ const SearchBar = (props) => {
         const { value } = event.target
         setSTerm(value)
     }
+
+
+    
     return ( <form className="frontPage" onSubmit={handleSubmit} >
     <div >
         <input type="text" name="search_term" value={sTerm} onChange={onChange} ></input>

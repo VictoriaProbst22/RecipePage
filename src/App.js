@@ -6,8 +6,9 @@ import axios from "axios";
 //import pages
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
-import SearchPage from "./Pages/SearchPage"
-import SearchBar from "./Pages/SearchBar";
+import SearchPage from "./Pages/Search/SearchPage";
+import SearchBar from "./Pages/Search/SearchBar";
+import RecipeList from "./Pages/Saved Recipes/RecipeList";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
      <h3> Welcome, Search for a Recipe:</h3>
      <SearchBar searchRecipeProps={runSearch} />
      <SearchPage searchResults={searchResults} />
+     <RecipeList />
      <Footer />
     </div>
   );
