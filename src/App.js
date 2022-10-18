@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 
-
 //import pages
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
@@ -35,9 +34,10 @@ function App() {
      <h3> Welcome, Search for a Recipe:</h3>
      <SearchBar searchRecipeProps={runSearch} />
      <SearchPage searchResults={searchResults} />
-     <RecipeList />
+      <RecipeList/>
      <Footer />
     </div>
+ 
   );
 }
 
