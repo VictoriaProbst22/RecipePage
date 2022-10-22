@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const RecipeList = () => {
     //save recipe list in state
@@ -8,16 +8,38 @@ const RecipeList = () => {
 
 
     //use axios to get recipe list database
-    const getRecipeList = async ()=>{
+
+
+    useEffect(() => {
+        const getRecipeList = async () => {
+          try {
+            let response = await axios.get('http://127.0.0.1:8000/recipes/');
+            setRecipeList(response.data);
+          } catch (error) {
+            console.log(error.response.data);
+          }
+        };
+        getRecipeList();
+      }, []);
+
+
+
+
+
+
+
+
+
+    //Delete Recipe From Database
+
+    const deleteRecipe = async (el)=>{
         try {
-            let response = await axios.get('http://127.0.0.1:8000/recipes/')
+            let response = await axios.delete(`http://127.0.0.1:8000/recipes/${el.id}/`)
             console.log(response.data)
-            setRecipeList(response.data)
         } catch (error) {
-            console.log(error.message.data)
+            console.log(error.message)
         }
     }
-    getRecipeList();
 
 
     return ( <div>
@@ -27,7 +49,9 @@ const RecipeList = () => {
                 <div> 
                     <ul>{el.title}</ul>
                     <img src={el.image} alt="Screwed Up" />
+                <button onClick={()=> deleteRecipe(el)}>Delete</button>
                 </div>
+                
             )
         })}
     
