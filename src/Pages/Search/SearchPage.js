@@ -32,7 +32,7 @@ const SearchPage = (props) => {
              {props.searchResults.map((el, index)=>{
                 return(<div>
                     <img src={el.image} alt="Screwed Up" />
-                    <li>{el.title}</li>
+                    <h4>{el.title}</h4>
                     <div>
                     <button onClick={()=> addRecipe(el)}> + Save Recipe</button>
                     </div>

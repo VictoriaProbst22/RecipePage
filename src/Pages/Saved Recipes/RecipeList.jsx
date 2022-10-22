@@ -47,7 +47,7 @@ const RecipeList = () => {
         {recipeList.map((el)=>{
             return(
                 <div> 
-                    <ul>{el.title}</ul>
+                    <h4>{el.title}</h4>
                     <img src={el.image} alt="Screwed Up" />
                 <button onClick={()=> deleteRecipe(el)}>Delete</button>
                 </div>
