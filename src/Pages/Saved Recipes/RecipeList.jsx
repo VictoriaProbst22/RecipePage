@@ -57,14 +57,15 @@ const RecipeList = () => {
 
     return ( <div>
         <h2> Saved Recipes: </h2>
-        {recipeList.map((el)=>{
+        {recipeList.map((el, index)=>{
             return(
                 <div> 
-                    <h4>{el.title}</h4>
+                    
+                    <h4>{index + 1} .) {el.title}</h4>
                     <img src={el.image} alt="Screwed Up" />
             
                 <button onClick={()=> getIngredients(el)}>See Ingredients</button>
-                <h5> Ingredients: </h5>
+                
                 {ingredientsList.map((el)=>{
                     return(
                         <div>
