@@ -41,6 +41,17 @@ const RecipeList = () => {
         }
     }
 
+    // Get Recipe by using Recipe ID in Async Function
+
+    const getIngredients = async (el) =>{
+        try {
+            let response = await axios.get(`https://api.spoonacular.com/recipes/${el.id}/ingredientWidget.json?apiKey=a30a8055bce74d128fd0d69da6ff918a`)
+            console.log(response.data)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
 
     return ( <div>
         <h2> Saved Recipes: </h2>
@@ -50,6 +61,7 @@ const RecipeList = () => {
                     <h4>{el.title}</h4>
                     <img src={el.image} alt="Screwed Up" />
                 <button onClick={()=> deleteRecipe(el)}>Delete</button>
+                <button onClick={()=> getIngredients(el)}>See Full Recipe</button>
                 </div>
                 
             )
