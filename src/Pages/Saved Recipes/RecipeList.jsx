@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 const RecipeList = () => {
     //save recipe list in state
     const [recipeList, setRecipeList] = useState([])
+    const [ingredientsList, setIngredientsList] = useState([])
 
 
     //use axios to get recipe list database
@@ -22,9 +23,7 @@ const RecipeList = () => {
         getRecipeList();
       }, []);
 
-
-
-
+  
 
 
 
@@ -40,6 +39,7 @@ const RecipeList = () => {
             console.log(error.message)
         }
     }
+    
 
     // Get Recipe by using Recipe ID in Async Function
 
@@ -47,11 +47,13 @@ const RecipeList = () => {
         try {
             let response = await axios.get(`https://api.spoonacular.com/recipes/${el.id}/ingredientWidget.json?apiKey=a30a8055bce74d128fd0d69da6ff918a`)
             console.log(response.data)
+            setIngredientsList(response.data.ingredients)
         } catch (error) {
             console.log(error.message)
         }
     }
 
+    console.log("Ingredients: ", ingredientsList)
 
     return ( <div>
         <h2> Saved Recipes: </h2>
@@ -60,11 +62,21 @@ const RecipeList = () => {
                 <div> 
                     <h4>{el.title}</h4>
                     <img src={el.image} alt="Screwed Up" />
+            
+                <button onClick={()=> getIngredients(el)}>See Ingredients</button>
+                <h5> Ingredients: </h5>
+                {ingredientsList.map((el)=>{
+                    return(
+                        <div>
+                            <li> {el.name}</li>
+                            <ul>{el.amount.us.value} {el.amount.us.unit}</ul> </div>
+                    )
+                })}
                 <button onClick={()=> deleteRecipe(el)}>Delete</button>
-                <button onClick={()=> getIngredients(el)}>See Full Recipe</button>
                 </div>
                 
-            )
+            )   
+             
         })}
     
     </div> );

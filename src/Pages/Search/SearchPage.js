@@ -25,6 +25,8 @@ const SearchPage = (props) => {
         }
     }
 
+   
+    
   
     
     return ( <div>
@@ -35,6 +37,7 @@ const SearchPage = (props) => {
                     <h4>{el.title}</h4>
                     <div>
                     <button onClick={()=> addRecipe(el)}> + Save Recipe</button>
+                    
                     </div>
                     
                 </div>)
