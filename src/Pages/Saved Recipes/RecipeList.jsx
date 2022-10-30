@@ -6,6 +6,7 @@ const RecipeList = () => {
     //save recipe list in state
     const [recipeList, setRecipeList] = useState([])
     const [ingredientsList, setIngredientsList] = useState([])
+    const [instructionsList, setInstructionsList] = useState([])
 
 
     //use axios to get recipe list database
@@ -23,8 +24,35 @@ const RecipeList = () => {
         getRecipeList();
       }, []);
 
+
+      
+    // Get Recipe by using Recipe ID in Async Function
+
+    const getIngredients = async (el) =>{
+        try {
+            let response = await axios.get(`https://api.spoonacular.com/recipes/${el.id}/ingredientWidget.json?apiKey=a30a8055bce74d128fd0d69da6ff918a`)
+            console.log(response.data)
+            setIngredientsList(response.data.ingredients)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    console.log("Ingredients: ", ingredientsList)
+
   
 
+      // Get Recipe Instructions
+      const getInstructions = async (el) => {
+        try {
+            let response = await axios.get(`https://api.spoonacular.com/recipes/${el.id}/analyzedInstructions?apiKey=a30a8055bce74d128fd0d69da6ff918a`)
+            console.log(response.data)
+            setInstructionsList(response.data.steps)
+        } catch (error) {
+            console.log(error.message)
+        }
+      }
+      console.log("Instructions: ", instructionsList)
 
 
 
@@ -41,19 +69,6 @@ const RecipeList = () => {
     }
     
 
-    // Get Recipe by using Recipe ID in Async Function
-
-    const getIngredients = async (el) =>{
-        try {
-            let response = await axios.get(`https://api.spoonacular.com/recipes/${el.id}/ingredientWidget.json?apiKey=a30a8055bce74d128fd0d69da6ff918a`)
-            console.log(response.data)
-            setIngredientsList(response.data.ingredients)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    console.log("Ingredients: ", ingredientsList)
 
     return ( <div>
         <h2> Saved Recipes: </h2>
@@ -69,11 +84,13 @@ const RecipeList = () => {
                 {ingredientsList.map((el)=>{
                     return(
                         <div>
-                            <li> {el.name}</li>
-                            <ul>{el.amount.us.value} {el.amount.us.unit}</ul> </div>
+                            <li> {el.amount.us.value} {el.amount.us.unit} {el.name}</li>
+                            </div>
                     )
                 })}
                 <button onClick={()=> deleteRecipe(el)}>Delete</button>
+                <button onClick={()=> getInstructions(el)}> See Instructions </button>
+                
                 </div>
                 
             )   
