@@ -47,7 +47,7 @@ const RecipeList = () => {
         try {
             let response = await axios.get(`https://api.spoonacular.com/recipes/${el.id}/analyzedInstructions?apiKey=a30a8055bce74d128fd0d69da6ff918a`)
             console.log(response.data)
-            setInstructionsList(response.data)
+            setInstructionsList(response.data[0].steps)
         } catch (error) {
             console.log(error.message)
         }
@@ -89,6 +89,12 @@ const RecipeList = () => {
                 })}
                 </div>
                 <div> <button onClick={()=> getInstructions(el)}> See Instructions </button> </div>
+                {instructionsList.map((el)=>{
+                    return( <div> 
+                        <li>{el.step}</li>
+                    </div>)
+                })}
+                
 
             
                 <div> <button onClick={()=> deleteRecipe(el)}>Delete</button> </div>
