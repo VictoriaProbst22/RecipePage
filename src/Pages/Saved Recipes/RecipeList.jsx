@@ -78,7 +78,7 @@ const RecipeList = () => {
                     
                     <h4>{index + 1} .) {el.title}</h4>
                     <img src={el.image} alt="Screwed Up" />
-                    <div><button onClick={()=> getIngredients(el)}>See Ingredients</button>
+                  <div> <button onClick={()=> getIngredients(el)}>See Ingredients</button> </div>
                 
                 {ingredientsList.map((el)=>{
                     return(
@@ -87,7 +87,6 @@ const RecipeList = () => {
                             </div>
                     )
                 })}
-                </div>
                 <div> <button onClick={()=> getInstructions(el)}> See Instructions </button> </div>
                 {instructionsList.map((el)=>{
                     return( <div> 
